@@ -10,17 +10,25 @@ function App() {
   //Nick user
   const [userName, setUserName] = useState(null);
   const [socket, setSocket] = useState(null);
+  const [saveMessages, setSaveMessages] = useState([]);
 
   useEffect(() => {
     setSocket(io.connect(ENDPOINT, { forceNew: true }));
-  }, []);
+    const myMessages = userName && userName.response ? userName.response : [];
+    setSaveMessages(myMessages);
+  }, [userName]);
 
   return (
     <div className="">
-      {!userName ? (
-        <NickName setUserName={setUserName} />
+      {!userName || userName.nickName ? (
+        <NickName setUserName={setUserName} userName={userName} />
       ) : (
-        <ChatForm nickName={userName} socket={socket} />
+        <ChatForm
+          nickName={userName}
+          socket={socket}
+          setUserName={setUserName}
+          saveMessages={saveMessages}
+        />
       )}
     </div>
   );

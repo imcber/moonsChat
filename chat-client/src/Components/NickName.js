@@ -1,10 +1,11 @@
 import React from "react";
 
-const NickName = ({ setUserName }) => {
+const NickName = ({ setUserName, userName }) => {
   const handlerSubmit = (e) => {
     e.preventDefault();
     setUserName(e.target.nickName.value);
   };
+  const actualNick = userName && userName.nickName ? userName.nickName : "";
 
   return (
     <div className="h-screen w-screen bg-indigo-400">
@@ -19,6 +20,7 @@ const NickName = ({ setUserName }) => {
           id="nickName"
           className="xl:w-3/4 w-4/5 bg-transparent text-white xl:text-6xl text-3xl border-solid border-b-8 border-pink-300 text-center rounded m-5"
           autoComplete="off"
+          defaultValue={actualNick}
         />
         <button
           type="submit"

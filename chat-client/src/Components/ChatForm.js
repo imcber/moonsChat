@@ -3,9 +3,9 @@ import MessageCard from "./MessageCard";
 import HeaderChat from "./HeaderChat";
 import SendButton from "./SendButton";
 
-const ChatForm = ({ nickName, socket }) => {
+const ChatForm = ({ nickName, socket, setUserName, saveMessages }) => {
   //Respuesta server para los mensajes
-  const [response, setResponse] = useState([]);
+  const [response, setResponse] = useState([...saveMessages]);
   const divChat = useRef(null);
   useEffect(() => {
     //Copia del response
@@ -23,19 +23,26 @@ const ChatForm = ({ nickName, socket }) => {
     return () => socket.disconnect();
   }, []);
 
+  //funcion para mandar mensajes
   const sendMessage = (e) => {
+    //para que no recargue
     e.preventDefault();
+    //obtenemos el mensaje
     const {
       target: { message },
     } = e;
-    console.log(message);
     if (message.value.trim() === "") return;
     socket.emit("new-message", { message: message.value, nickName });
     message.value = "";
   };
+
+  const modifyName = () => {
+    setUserName({ nickName, response });
+  };
+
   return (
     <div className="w-screen h-screen bg-gray-200 max-h-screen">
-      <HeaderChat nickName={nickName} />
+      <HeaderChat nickName={nickName} modifyName={modifyName} />
       <div
         className="w-full flex flex-col overflow-y-scroll p-5"
         style={{ height: "75%" }}
