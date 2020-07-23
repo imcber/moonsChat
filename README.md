@@ -4,7 +4,8 @@ Este es un chat para la prueba moons, este es con reactjs,express y socketio
 # Instalacion
 En este repositorio se encuentra el server y el cliente.
 # Iniciar server
-Se tienen que abrir '/server' e iniciar con ### `node app.js`.
+Se tienen que abrir '/server' e iniciar con 
+### `node app.js`.
 # Iniciar cliente
 Se tienen que abrir '/chat-client' e iniciar con ### `npm start`.
 # Modifica tu IP
