@@ -4,7 +4,7 @@ import ChatForm from "./Components/ChatForm";
 import NickName from "./Components/NickName";
 
 //ENDPOINT del server
-const ENDPOINT = "http://192.168.100.29:4000";
+const ENDPOINT = "http://localhost:4000";
 
 function App() {
   //Nick user
